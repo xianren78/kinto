@@ -1,45 +1,20 @@
-> 提醒： 免费空间请不要滥用！！！
+# 一键部署 v2ray 到 heroku  
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+- - -
+- - -
+1.部署时配置 v2ray core 的版本、Vmess协议的UUID、AlterId、Path和连接缓存。
 
-下面是kintohub部署方法，v2-heroku的部署方法请见：[Deploy to Heroku
-](https://github.com/yeahwu/kinto/blob/master/v2-heroku.md)
+2.如果输入AppName变量，则自动生成订阅地址和二维码，通过配置V2_QR_Path变量修改地址
+二维码地址：https://test.herokuapp.com/1234/v2.png
+订阅地址：https://test.herokuapp.com/1234 (test改成自己的app名称，如果更改了V2_QR_Path，同时也要将对应的1234改成修改后的)
 
-利用kintohub免费空间部署v2ray和tor，部署成功后，可用v2ray客户端直接访问tor网络，比如暗网.onion，v2ray.json文件中设置了路由分流了tor网络，非tor流量不受影响。
+3.服务端部署后，点 open app ，能正常显示网页，地址补上path后访问显示 Bad Request，表示部署成功。
 
-### 部署服务端
-1. 点开 https://app.kintohub.com/ 新建一个APP，点击 Create Service ,然后创建 Web App 如图：
+4.更新 v2ray 版本，访问 https://dashboard.heroku.com/apps 选择部署好v2ray的app，如果VER变量为 latest。直接选择More --> Restart all dynos, 程序自动重启，可通过view Logs确认进度。（更新指定版本： Settings --> Reveal Config Varsapp -->VER，修改成需要的版本号，例如 3.21）
 
-![创建 web app](/img/kinto2.PNG)
+# 参考 
+https://github.com/v2ray/v2ray-core
 
-2. Repository 填上git链接和默认分支master
+https://github.com/wangyi2005/v2ray-heroku
 
-![repository](/img/kinto1.PNG)
-
-3. Build Settings 文件名填写Dockerfile，端口填上8888，填写如下：
-
-![build](/img/kinto.PNG)
-
-最后点击右上角 Deploy，部署完成，会生成一个链接，点击链接，如果显示Bad Request，即为成功。
-
-### 客户端配置
-
-客户端配置看图吧，不多讲：
-
-![v2ray](/img/kinto3.jpg)
-
-默认UUID：c95ef1d4-f3ac-4586-96e9-234a37dda068
-
-### 修改UUID
-
-方法一：
-
-v2ray的配置文件config.json，可以改为自己的私密链接，比如 https://gist.github.com/ 里自定义v2ray配置，当然你也可参考本项目的config.json配置，然后生成链接。最后部署的时候写入到Environment variables里，如图：
-
-![gist](/img/kinto4.jpg)
-
-方法二：
-
-Fork本项目，到config.json里面修改uuid或其它，然后到Dockerfile里面修改ENV CONFIG= 指向链接，例如：`ENV CONFIG=https://raw.githubusercontent.com/yeahwu/kinto/master/config.json`指向你自己项目的config.json文件。
-
-最后，打钱：https://starts.sh/donation.html
-
-测试暗网地址：http://vq7kihyfoqcoluju.onion/donation.html
+https://github.com/1715173329/v2ray-heroku-undone
