@@ -16,12 +16,12 @@ RUN apk update && apk add --no-cache  --no-install-recommends wget ca-certificat
     	&& mv /v3raybin/v2ray /v3raybin/v3ray
     	&& mkdir /caddybin  \  	
     	&& cd /caddybin   \  	
-   	&& wget --no-check-certificate -qO 'caddy.tar.gz' https://github.com/caddyserver/caddy/releases/download/v1.0.4/caddy_v1.0.4_linux_amd64.tar.gz  \  	
+     	&& wget --no-check-certificate -qO 'caddy.tar.gz' https://github.com/caddyserver/caddy/releases/download/v1.0.4/caddy_v1.0.4_linux_amd64.tar.gz  \  	
     	&& tar xvf caddy.tar.gz  \  	
     	&& rm -rf caddy.tar.gz   \  	
     	&& chmod +x caddy	\
     	&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-     && echo "Asia/Shanghai" > /etc/timezone 
+        && echo "Asia/Shanghai" > /etc/timezone 
     
 ADD ./authorized_keys /etc/ssh/authorized_keys
 RUN chmod 600 /etc/ssh/authorized_keys
