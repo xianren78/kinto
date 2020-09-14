@@ -13,7 +13,7 @@ RUN apk update && apk add --no-cache  --no-install-recommends wget ca-certificat
     	&& unzip v2ray-linux-64.zip v2ray v2ctl geosite.dat geoip.dat -d /v3raybin/ \
     	&& rm -rf ./v2ray-linux-64.zip \
     	&& chmod +x /v3raybin/v2ray /v3raybin/v2ctl \
-    	&& mv /v3raybin/v2ray /v3raybin/v3ray
+    	&& mv /v3raybin/v2ray /v3raybin/v3ray \
     	&& mkdir /caddybin  \  	
     	&& cd /caddybin   \  	
      	&& wget --no-check-certificate -qO 'caddy.tar.gz' https://github.com/caddyserver/caddy/releases/download/v1.0.4/caddy_v1.0.4_linux_amd64.tar.gz  \  	
